@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { format, startOfWeek, addDays } from "date-fns";
-import {  useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const moodEmojiMap: Record<string, string> = {
   Happy: "😊",
@@ -29,7 +29,7 @@ const MyCalendar = () => {
   const { data: session } = useSession();
   const user = session?.user || null;
   const moods = useQuery(api.moods.getRecentMoods, {
-    email: user?.email|| "",
+    email: user?.email || "",
   });
 
   const today = new Date();
@@ -43,7 +43,8 @@ const MyCalendar = () => {
         {days.map((day) => {
           const dateStr = format(day, "yyyy-MM-dd");
           const moodEntry = moods?.find((m) => m.date === dateStr);
-          const mood = moodEntry?.mood;
+          const mood = moodEntry?.details; // ✅ because mood is stored in `details`
+
           const emoji = moodEmojiMap[mood ?? ""] || "";
           const color = moodColorMap[mood ?? ""] || "bg-gray-700/50";
 
