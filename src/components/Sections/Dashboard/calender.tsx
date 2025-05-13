@@ -42,7 +42,7 @@ const MyCalendar = () => {
       <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-7 gap-4">
         {days.map((day) => {
           const dateStr = format(day, "yyyy-MM-dd");
-          const moodEntry = moods?.find((m) => m.date === dateStr);
+         const moodEntry = moods?.find((m) => m.date === dateStr); // ✅ Finds the mood entry for that date
           const mood = moodEntry?.mood;
           const emoji = moodEmojiMap[mood ?? ""] || "";
           const color = moodColorMap[mood ?? ""] || "bg-gray-700/50";

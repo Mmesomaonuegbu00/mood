@@ -27,16 +27,16 @@ export const getRecentChanges = query({
 // ✅ Insert a new mood, sleep, or social event
 export const addCalendarEvent = mutation({
   args: {
-    email: v.string(),  // changed from userId to email
-    date: v.string(),       
+    email: v.string(),  
+    date: v.string(),  // ✅ Ensure this is passed
     changeType: v.string(),   
-    timestamp: v.number(),     
+    timestamp: v.number(),      
     details: v.optional(v.string()),
   },
   handler: async ({ db }, { email, date, changeType, timestamp, details }) => {
     return await db.insert("calendarChanges", {
       email,
-      date,
+      date,  // ✅ Store the date when the mood/event occurred
       changeType,
       timestamp,
       details,
