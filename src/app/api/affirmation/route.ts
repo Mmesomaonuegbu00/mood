@@ -9,6 +9,7 @@ export async function GET() {
       status: 200,
     });
   } catch (error) {
+    console.error("Failed to fetch affirmation:", error); // 👈 log the actual error
     return NextResponse.json(
       { affirmation: "You are strong and capable. Keep going!" },
       { status: 500 }
