@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
+
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --cyber-bg-color: #000000;
+  --cyber-grid-color: #13080e;
+  ---text-color:#ffffff
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply min-h-screen;
+  background-color: var(--cyber-bg-color);
+  color: var(---text-color);
+  
+   background-image:
+    linear-gradient(var(--cyber-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyber-grid-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-repeat: repeat; 
+} 
+
+
+.react-calendar {
+  width: 100% !important;
+  /* height: 100% !important; */
+  max-width: 100% !important;
+  border: none !important;
+}
+
+.react-calendar__month-view {
+  width: 100% !important;
+
+}
+.react-calendar {
+  background: transparent !important;
+}
+
+.custom-calendar {
+  font-size: 1.25rem; /* optional to make it visually bigger */
+  color: rgb(61, 21, 51);
+}
+
+.chat-box {
+  height: 700px; /* Set the height you need */
+  overflow-y: auto; /* Enable scrolling */
+  scroll-behavior: smooth; /* Smooth scroll */
+}
+
+
+.chat-box {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer & Edge */
+}
+
+.chat-box::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and newer Edge */
+}
+
+.recent {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer & Edge */
+}
+
+.recent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and newer Edge */
+}
+
+/* Hide default current day and selected tile background */
+.react-calendar__tile--now,
+.react-calendar__tile--active,
+.react-calendar__tile--hasActive {
+  background: transparent !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
