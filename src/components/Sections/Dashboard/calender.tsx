@@ -3,8 +3,7 @@ import React from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { format, startOfWeek, addDays } from "date-fns";
-import { useSession } from 'next-auth/react'
-
+import {  useSession } from 'next-auth/react'
 
 const moodEmojiMap: Record<string, string> = {
   Happy: "😊",
@@ -29,17 +28,13 @@ const moodColorMap: Record<string, string> = {
 const MyCalendar = () => {
   const { data: session } = useSession();
   const user = session?.user || null;
+  const moods = useQuery(api.moods.getRecentMoods, {
+    email: user?.email|| "",
+  });
+
   const today = new Date();
   const start = startOfWeek(today, { weekStartsOn: 1 }); // Monday
   const days = Array.from({ length: 7 }).map((_, i) => addDays(start, i));
-  const end = addDays(start, 6); // Sunday 
-
-  const moods = useQuery(api.calendarChanges.getRecentChanges, {
-    email: user?.email || "",
-    startDate: format(start, "yyyy-MM-dd"),
-    endDate: format(end, "yyyy-MM-dd"),
-  });
-
 
   return (
     <div className="bg-gradient-to-br from-pink-300/30 to-black border border-gray-700 rounded-xl p-6">
@@ -47,11 +42,10 @@ const MyCalendar = () => {
       <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-7 gap-4">
         {days.map((day) => {
           const dateStr = format(day, "yyyy-MM-dd");
-          const moodEntry = moods?.find((m) => m.date === dateStr && m.changeType === "mood"); // ✅ Filter only moods
-          const mood = moodEntry?.details; // ✅ Use `details` field instead of `mood`
+          const moodEntry = moods?.find((m) => m.date === dateStr);
+          const mood = moodEntry?.mood;
           const emoji = moodEmojiMap[mood ?? ""] || "";
           const color = moodColorMap[mood ?? ""] || "bg-gray-700/50";
-
 
           return (
             <div
