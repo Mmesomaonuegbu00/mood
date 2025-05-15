@@ -21,7 +21,7 @@ export default function AuthWrapper({ children }: { children: ReactNode }) {
     }
   }, [session?.user?.email, logAction]); // ✅ Runs once when email or logAction changes
 
-  console.log(logAction)
-  console.log(session?.user)
+  // console.log(logAction)
+  // console.log(session?.user)
   return <>{children}</>;
 }
