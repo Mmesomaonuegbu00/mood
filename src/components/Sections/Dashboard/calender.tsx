@@ -39,7 +39,7 @@ const MyCalendar = () => {
   return (
     <div className="bg-gradient-to-br from-pink-300/30 to-black border border-gray-700 rounded-xl p-6">
       <h2 className="text-lg font-semibold mb-4">This Week&#39;s Mood</h2>
-      <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-7 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-7 gap-3 mx-auto">
         {days.map((day) => {
           const dateStr = format(day, "yyyy-MM-dd");
           const moodEntry = moods?.find((m) => m.date === dateStr);
@@ -50,7 +50,7 @@ const MyCalendar = () => {
           return (
             <div
               key={dateStr}
-              className={`flex flex-col items-center px-3 py-1 w-[6rem] h-[7rem] md:py-3 text-center rounded-lg ${color} text-white`}
+              className={`flex flex-col items-center px-1 py-1 w-[5.5rem] h-[7rem] md:py-3 text-center rounded-lg ${color} text-white mx-auto`}
             >
               <span className="text-sm font-medium">
                 {format(day, "EEE")}
